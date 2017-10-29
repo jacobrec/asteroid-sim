@@ -13,7 +13,6 @@ import java.util.List;
  */
 public abstract class Collidable {
     Body body;
-    List<Fixture> segments;
 
 
 
@@ -21,9 +20,6 @@ public abstract class Collidable {
         return body;
     }
 
-    public List<Fixture> getSegments() {
-        return segments;
-    }
 
 
 
@@ -31,7 +27,4 @@ public abstract class Collidable {
         this.body = body;
     }
 
-    public void setSegments(List<Fixture> segments) {
-        this.segments = segments;
-    }
 }

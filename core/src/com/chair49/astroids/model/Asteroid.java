@@ -13,12 +13,10 @@ import java.util.List;
 public class Asteroid extends Collidable {
 
     public Asteroid(World world, Vector2 position, float area, Vector2 momentum) {
-        segments = new LinkedList<Fixture>();
         reset(world, position, area, momentum);
     }
 
     public void reset(World world, Vector2 position, float area, Vector2 momentum) {
-        segments.clear();
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -43,7 +41,7 @@ public class Asteroid extends Collidable {
         fixtureDef.density = MathUtils.random(0.1f, 5f);
         fixtureDef.friction = MathUtils.random(0.1f, 5f);
         fixtureDef.restitution = MathUtils.random(0.1f, 0.9f); // Make it bounce a little bit
-        segments.add(body.createFixture(fixtureDef));
+        body.createFixture(fixtureDef);
     }
 
     public Vector2 randomPoint() {
