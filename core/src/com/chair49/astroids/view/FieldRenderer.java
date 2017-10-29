@@ -29,7 +29,8 @@ public class FieldRenderer {
 
         debug = new Box2DDebugRenderer();
 
-        sr.setColor(0.2f,0.2f,0.2f,1);
+        //sr.setColor(0.2f, 0.2f, 0.2f, 1);
+        sr.setColor(0.2f, 1f, 0.2f, 1);
 
     }
 
@@ -38,8 +39,7 @@ public class FieldRenderer {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
 
-
-        sr.begin(ShapeRenderer.ShapeType.Filled);
+        sr.begin(ShapeRenderer.ShapeType.Line);
         for (Asteroid ast : model.asteroids) {
             drawAsteroid(ast);
         }
@@ -47,26 +47,24 @@ public class FieldRenderer {
         debug.render(model.getWorld(), cam.combined);
     }
 
-    private void drawAsteroid(Asteroid ast) {
-        for (int i = 0; i < ast.getBody().getFixtureList().size; i++) {
+    private void drawAsteroid(Asteroid asteroid) {
+        for (int i = 0; i < asteroid.getBody().getFixtureList().size; i++) {
+            PolygonShape shape = (PolygonShape) asteroid.getBody().getFixtureList().get(i).getShape();
+            float[] vertices = new float[shape.getVertexCount() * 2];
 
-            PolygonShape shape = (PolygonShape) ast.getBody().getFixtureList().get(i).getShape();
-            float[] verts = new float[6];
             Vector2 point = new Vector2();
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < shape.getVertexCount(); j++) {
                 shape.getVertex(j, point);
-                verts[2*j] = point.x;
-                verts[2*j + 1] = point.y;
-
+                vertices[2 * j] = point.x;
+                vertices[2 * j + 1] = point.y;
             }
-            Vector2 pos = ast.getBody().getPosition();
-            float angle = ast.getBody().getAngle();
+            Vector2 position = asteroid.getBody().getPosition();
+            float angle = asteroid.getBody().getAngle();
 
             sr.identity();
-
-            sr.translate(pos.x, pos.y, 0);
-            sr.rotate(0,0,1, angle * MathUtils.radiansToDegrees);
-            sr.triangle(verts[0],verts[1],verts[2],verts[3],verts[4],verts[5]);
+            sr.translate(position.x, position.y, 0);
+            sr.rotate(0, 0, 1, angle * MathUtils.radiansToDegrees);
+            sr.polygon(vertices);
         }
     }
 }
