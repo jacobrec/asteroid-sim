@@ -1,5 +1,6 @@
 package com.chair49.astroids.model;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -29,12 +30,14 @@ public class Asteroid extends Collidable {
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape triangle = new PolygonShape();
 
-        triangle.set(new float[]{0, 0, 0, 1, 0.5f, 1});
+        triangle.set(new float[]{MathUtils.random()+0.1f, MathUtils.random()+0.1f, MathUtils.random()+0.1f, MathUtils.random()+0.1f, MathUtils.random()+0.1f, MathUtils.random()+0.1f});
 
         fixtureDef.shape = triangle;
-        fixtureDef.density = 0.5f;
-        fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 0.6f; // Make it bounce a little bit
+        fixtureDef.density = MathUtils.random(0.1f,5f);
+        fixtureDef.friction = MathUtils.random(0.1f,5f);
+        fixtureDef.restitution = MathUtils.random(0.1f,0.9f); // Make it bounce a little bit
+
+
         return body.createFixture(fixtureDef);
     }
 

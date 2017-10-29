@@ -15,7 +15,7 @@ import java.util.List;
 public class AsteroidField {
     public List<Asteroid> asteroids;
     World world;
-    final int asteroidCount = 5;
+    final int asteroidCount = 100;
     final float worldWidth = 16f;
     final float worldHeight = 9f;
     // Ratio between Gdx world measurements and coordinate system.
@@ -32,8 +32,8 @@ public class AsteroidField {
             float x = MathUtils.random(worldWidth);
             float y = MathUtils.random(worldHeight);
             Asteroid asteroid = new Asteroid(world, new Vector2(x, y));
-            float vx = MathUtils.random(3f);
-            float vy = MathUtils.random(3f);
+            float vx = MathUtils.random(-3f,3f);
+            float vy = MathUtils.random(-3f,3f);
             asteroid.setVelocity(new Vector2(vx, vy));
             asteroids.add(asteroid);
         }
