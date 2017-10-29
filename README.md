@@ -18,13 +18,13 @@ Screen size of application:
 - [x] Does the program use the full screen size? /5
 
 Interface and usage:
-- [ ] Does the program use a simple interface? Is it easy to use? /15
+- [x] Does the program use a simple interface? Is it easy to use? /15
 
 Display: 
-- [ ] Do the asteroid and shuttle sizes seem appropriate? Do they accurately represent their real counterparts? /15
+- [x] Do the asteroid and shuttle sizes seem appropriate? Do they accurately represent their real counterparts? /15
 
 Code Readability:
-- [ ] Is the program coded in a systematic manner? Using appropriate architecture? /8
+- [x] Is the program coded in a systematic manner? Using appropriate architecture? /8
 - [ ] Is there a sufficient amount of comments? /2
 
 ### Documentation
@@ -33,12 +33,12 @@ Code Readability:
 ### Solution Performance
 
 Complete Solution:
-- [ ] Does the program meet the requirements described in the problem? /5
+- [x] Does the program meet the requirements described in the problem? /5
 
 Part A:
-- [ ] Do asteroids break apart when they collide? /5
-- [ ] Can you vary the number of asteroids currently being displayed? /5
-- [ ] Are asteroids recreated when others leave the screen? /2
+- [x] Do asteroids break apart when they collide? /5
+- [x] Can you vary the number of asteroids currently being displayed? /5
+- [x] Are asteroids recreated when others leave the screen? /2
 
 Part B:
 - [ ] Is the shuttle able to navigate through the simulation? /5
@@ -46,7 +46,7 @@ Part B:
 - [ ] Does the program offer above and beyond features? /10
 
 Performance: 
-- [ ] Does the simulation scale well when more asteroids are added? (Slowdown isn’t too extreme) /5
+- [x] Does the simulation scale well when more asteroids are added? (Slowdown isn’t too extreme) /5
 
 Bugs:
 - [ ] Are there any reported bugs/issues? /-15 (-5 per bug)
