@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by jacob on 29/10/17.
@@ -21,24 +22,37 @@ public class Asteroid extends Collidable {
 
         this.body = world.createBody(bodyDef);
 
-        for (int i = 0; i < 1; i++) {
-            segments.add(createFixture(body));
-        }
+        createFixtures(body, 5);
     }
 
-    private Fixture createFixture(Body body) {
+    private void createFixtures(Body body, int numberOfFixtures) {
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape triangle = new PolygonShape();
 
-        triangle.set(new float[]{MathUtils.random()+0.1f, MathUtils.random()+0.1f, MathUtils.random()+0.1f, MathUtils.random()+0.1f, MathUtils.random()+0.1f, MathUtils.random()+0.1f});
-
-        fixtureDef.shape = triangle;
-        fixtureDef.density = MathUtils.random(0.1f,5f);
-        fixtureDef.friction = MathUtils.random(0.1f,5f);
-        fixtureDef.restitution = MathUtils.random(0.1f,0.9f); // Make it bounce a little bit
+        Vector2[] vertices = new Vector2[3];
+        List<Vector2> points = new LinkedList<Vector2>();
+        points.add(getPoint());
+        points.add(getPoint());
 
 
-        return body.createFixture(fixtureDef);
+
+        for(int i = 0; i < numberOfFixtures; i++) {
+            points.add(getPoint());
+
+            vertices = points.subList(points.size() - 3, points.size()).toArray(vertices);
+            triangle.set(vertices);
+
+            fixtureDef.shape = triangle;
+            fixtureDef.density = MathUtils.random(0.1f, 5f);
+            fixtureDef.friction = MathUtils.random(0.1f, 5f);
+            fixtureDef.restitution = MathUtils.random(0.1f, 0.9f); // Make it bounce a little bit
+
+            segments.add(body.createFixture(fixtureDef));
+        }
+    }
+
+    public Vector2 getPoint(){
+        return new Vector2(MathUtils.random() + 0.1f, MathUtils.random() + 0.1f);
     }
 
     public void setVelocity(Vector2 velocity) {

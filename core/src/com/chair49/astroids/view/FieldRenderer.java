@@ -21,7 +21,6 @@ public class FieldRenderer {
         cam = new OrthographicCamera();
         cam.setToOrtho(false, 16, 9);
 
-        debugRenderer = new Box2DDebugRenderer();
 
     }
 
