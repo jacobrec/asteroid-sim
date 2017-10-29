@@ -34,6 +34,9 @@ public class FieldController {
         repositionOffscreenAsteroids(model);
         removeDeadAsteroids(model);
         addNewAstroids(model);
+        for(Asteroid a : model.asteroids){
+            a.timeAlive += delta;
+        }
     }
 
     private void addNewAstroids(AsteroidField model) {

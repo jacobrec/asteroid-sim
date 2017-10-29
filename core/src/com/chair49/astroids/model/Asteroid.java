@@ -11,7 +11,7 @@ public class Asteroid extends Collidable {
     float density = MathUtils.random(0.1f, 5f);
     public float area;
     public boolean killMe;
-    float timeAlive;
+    public float timeAlive;
 
     public Asteroid(World world, Vector2 position, float area, Vector2 momentum) {
         reset(world, position, area, momentum);
