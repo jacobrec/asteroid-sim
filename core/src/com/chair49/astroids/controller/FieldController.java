@@ -23,14 +23,12 @@ public class FieldController {
             Asteroid asteroid = AsteroidFactory.getAsteroid(model.getWorld(), new Vector2(vx, vy),new Vector2(x, y), MathUtils.random(1f, 3f));
             model.asteroids.add(asteroid);
         }
-
+        model.getWorld().setContactListener(new Destructor3000());
     }
 
     public void update(AsteroidField model, float delta) {
         model.getWorld().step(delta, 6, 2);
-
         repositionOffscreenAsteroids(model);
-
     }
 
 

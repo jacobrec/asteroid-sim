@@ -31,9 +31,9 @@ public class AsteroidFactory {
         Asteroid a;
         if (astroids.size() > 0) {
             a = AsteroidFactory.astroids.pop();
-            a.reset(world, position, area);
+            a.reset(world, position, area, momentum);
         } else {
-            a = new Asteroid(world, position, area);
+            a = new Asteroid(world, position, area, momentum);
         }
         return a;
     }
