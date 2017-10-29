@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.chair49.astroids.model.Asteroid;
 import com.chair49.astroids.model.AsteroidField;
 import com.chair49.astroids.model.LightWeightAstroidThingy;
+import com.chair49.astroids.model.Shuttle;
 
 import java.util.List;
 
@@ -15,10 +16,7 @@ public class FieldController {
     // Max distance off screen asteroids are allowed to travel
     final private int padding = 5;
 
-
-
     public FieldController(AsteroidField model){
-
         // Create the asteroids with random positions and velocities
         for (int i = 0; i < model.getAsteroidCount(); i++) {
             float x = MathUtils.random(AsteroidField.worldWidth);

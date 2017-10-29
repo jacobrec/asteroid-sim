@@ -19,7 +19,6 @@ public class AsteroidField {
     public List<Asteroid> asteroids;
     public List<LightWeightAstroidThingy> asteroidsToAdd;
 
-
     World world;
     int asteroidCount;
     public final static float worldWidth = 16f;
@@ -28,6 +27,7 @@ public class AsteroidField {
     public final static float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
 
     HashMap<Body, Asteroid> bodyToAsteroid;
+    Shuttle shuttle;
 
     public AsteroidField(int asteroidCount) {
         this.asteroidCount = asteroidCount;
@@ -37,6 +37,9 @@ public class AsteroidField {
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
         bodyToAsteroid = new HashMap<Body, Asteroid>();
+
+        // Create the shuttle
+        shuttle = new Shuttle(world);
     }
 
     public void addAsteroid(Asteroid a) {

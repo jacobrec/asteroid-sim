@@ -55,7 +55,7 @@ public class FieldRenderer {
         }
         sr.end();
 
-        // Render text
+        // Render asteroid count
         batch.setColor(1f, 0f, 0f, 1f);
         batch.begin();
         font.draw(batch, String.valueOf(model.getAsteroidCount()), 25, 100);
