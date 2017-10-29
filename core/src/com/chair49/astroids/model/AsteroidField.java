@@ -16,9 +16,9 @@ public class AsteroidField {
     public List<Asteroid> asteroids;
     World world;
     final int asteroidCount = 5;
-    final float worldWidth = 16;
-    final float worldHeight = 9;
-    // Ratio between Gdx world measurements and worldWidth/worldHeight.
+    final float worldWidth = 16f;
+    final float worldHeight = 9f;
+    // Ratio between Gdx world measurements and coordinate system.
     final float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
 
     public AsteroidField() {
