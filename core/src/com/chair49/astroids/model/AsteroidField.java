@@ -21,7 +21,7 @@ public class AsteroidField {
 
 
     World world;
-    final int asteroidCount = 100;
+    final int asteroidCount = 20;
     public final static float worldWidth = 16f;
     public final static float worldHeight = 9f;
     // Ratio between Gdx world measurements and coordinate system.
