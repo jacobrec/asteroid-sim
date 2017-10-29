@@ -12,16 +12,15 @@ import java.util.List;
  */
 public class Asteroid extends Collidable {
 
-    public Asteroid(World world, Vector2 position) {
-        this.segments = new LinkedList<Fixture>();
+    public Asteroid(World world, Vector2 position, float area) {
+        segments = new LinkedList<Fixture>();
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         // Set our body's starting position in the world
         bodyDef.position.set(position);
 
-        this.body = world.createBody(bodyDef);
-
+        body = world.createBody(bodyDef);
         createFixtures(body, 5);
     }
 
@@ -34,9 +33,7 @@ public class Asteroid extends Collidable {
         points.add(getPoint());
         points.add(getPoint());
 
-
-
-        for(int i = 0; i < numberOfFixtures; i++) {
+        for (int i = 0; i < numberOfFixtures; i++) {
             points.add(getPoint());
 
             vertices = points.subList(points.size() - 3, points.size()).toArray(vertices);
@@ -51,8 +48,8 @@ public class Asteroid extends Collidable {
         }
     }
 
-    public Vector2 getPoint(){
-        return new Vector2(MathUtils.random() + 0.1f, MathUtils.random() + 0.1f);
+    public Vector2 getPoint() {
+        return new Vector2(MathUtils.random(), MathUtils.random());
     }
 
     public void setVelocity(Vector2 velocity) {
