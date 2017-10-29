@@ -53,5 +53,6 @@ public class AsteroidFactory {
     }
 
     public static Asteroid getAsteroid(LightWeightAstroidThingy a) {
+        return getAsteroid(a.w,a.position,a.momentum,a.area);
     }
 }

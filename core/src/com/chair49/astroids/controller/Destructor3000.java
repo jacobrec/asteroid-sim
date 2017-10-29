@@ -28,12 +28,12 @@ public class Destructor3000 implements ContactListener {
         a1.killMe = true;
         a2.killMe = true;
 
-        LightWeightAstroidThingy a3 = new LightWeightAstroidThingy(model.getWorld(),a1.getBody().getLinearVelocity(), a2.getBody().getPosition(), 1);
+        //LightWeightAstroidThingy a3 = new LightWeightAstroidThingy(model.getWorld(),a1.getBody().getLinearVelocity(), a2.getBody().getPosition(), 1);
 //        Asteroid a4 = model.getAsteroidFromBody(b1);
 //        Asteroid a5 = model.getAsteroidFromBody(b1);
 
 
-          model.asteroidsToAdd.add(a3);
+          //model.asteroidsToAdd.add(a3);
 //        model.asteroidsToAdd.add(a4);
 //        model.asteroidsToAdd.add(a5);
 
