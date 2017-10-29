@@ -1,7 +1,6 @@
 package com.chair49.astroids.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -15,7 +14,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.chair49.astroids.model.Asteroid;
 import com.chair49.astroids.model.AsteroidField;
-import javafx.scene.input.KeyCode;
 
 /**
  * Created by jacob on 29/10/17.
@@ -26,7 +24,7 @@ public class FieldRenderer {
     Box2DDebugRenderer debug;
 
     Batch batch;
-    BitmapFont font12;
+    BitmapFont font;
 
     public FieldRenderer() {
         // Creates new camera object, needed for the shape renderer
@@ -37,14 +35,12 @@ public class FieldRenderer {
         sr.setProjectionMatrix(cam.combined);
 
         debug = new Box2DDebugRenderer();
-
-        //sr.setColor(0.2f, 0.2f, 0.2f, 1);
         sr.setColor(0.2f, 1f, 0.2f, 1);
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("cmunbl.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 12;
-        font12 = generator.generateFont(parameter);
+        parameter.size = 100;
+        font = generator.generateFont(parameter);
         generator.dispose();
         batch = new SpriteBatch();
     }
@@ -53,25 +49,16 @@ public class FieldRenderer {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-
         sr.begin(ShapeRenderer.ShapeType.Line);
         for (Asteroid asteroid : model.asteroids) {
             drawAsteroid(asteroid);
         }
-        // Draw the interface for selecting the number of asteroids to display
-        sr.identity();
-        sr.line(0.5f, 0.5f, 15.5f, 0.5f);
         sr.end();
-        // Render circle
-        sr.begin(ShapeRenderer.ShapeType.Filled);
-        sr.circle(1, 0.5f, 0.2f, 30);
-        sr.end();
+
         // Render text
-        batch.setColor(1f, 1f, 1f, 1f);
-
-
+        batch.setColor(1f, 0f, 0f, 1f);
         batch.begin();
-        font12.draw(batch, "Hello", 1, 1);
+        font.draw(batch, String.valueOf(model.getAsteroidCount()), 25, 100);
         batch.end();
 
         debug.render(model.getWorld(), cam.combined);
