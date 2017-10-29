@@ -31,7 +31,7 @@ public class AsteroidField {
         for (int i = 0; i < asteroidCount; i++) {
             float x = MathUtils.random(worldWidth);
             float y = MathUtils.random(worldHeight);
-            Asteroid asteroid = new Asteroid(world, new Vector2(x, y), MathUtils.random(1f,3f));
+            Asteroid asteroid = new Asteroid(world, new Vector2(x, y), MathUtils.random(1f, 3f));
             float vx = MathUtils.random(-3f,3f);
             float vy = MathUtils.random(-3f,3f);
             asteroid.setVelocity(new Vector2(vx, vy));

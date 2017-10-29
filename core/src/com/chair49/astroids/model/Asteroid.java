@@ -14,12 +14,16 @@ public class Asteroid extends Collidable {
 
     public Asteroid(World world, Vector2 position, float area) {
         segments = new LinkedList<Fixture>();
+        reset(world, position, area);
+    }
+
+    public void reset(World world, Vector2 position, float area) {
+        segments.clear();
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         // Set our body's starting position in the world
         bodyDef.position.set(position);
-
         body = world.createBody(bodyDef);
         createFixtures(body, 5);
     }
@@ -30,12 +34,13 @@ public class Asteroid extends Collidable {
 
         Vector2[] vertices = new Vector2[3];
         List<Vector2> points = new LinkedList<Vector2>();
-        points.add(getPoint());
-        points.add(getPoint());
+        points.add(randomPoint());
+        points.add(randomPoint());
 
         for (int i = 0; i < numberOfFixtures; i++) {
-            points.add(getPoint());
+            points.add(randomPoint());
 
+            // Last 2 points added
             vertices = points.subList(points.size() - 3, points.size()).toArray(vertices);
             triangle.set(vertices);
 
@@ -48,7 +53,7 @@ public class Asteroid extends Collidable {
         }
     }
 
-    public Vector2 getPoint() {
+    public Vector2 randomPoint() {
         return new Vector2(MathUtils.random(), MathUtils.random());
     }
 
