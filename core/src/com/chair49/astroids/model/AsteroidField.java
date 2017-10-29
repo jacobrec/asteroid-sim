@@ -22,12 +22,12 @@ public class AsteroidField {
     final float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
 
     public AsteroidField() {
-        // Linked list because we will mainly be iterating the entire array as well as adding and removing from random locations
+        // Linked list because we will mainly be iterating the entire array as well as adding and removing from random indices
         asteroids = new LinkedList<Asteroid>();
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
 
-
+        // Create the asteroids with random positions and velocities
         for (int i = 0; i < asteroidCount; i++) {
             float x = MathUtils.random(worldWidth);
             float y = MathUtils.random(worldHeight);
@@ -41,6 +41,14 @@ public class AsteroidField {
 
     public World getWorld() {
         return world;
+    }
+
+    public float getWorldWidth() {
+        return worldWidth;
+    }
+
+    public float getWorldHeight() {
+        return worldHeight;
     }
 
     public float getBoxToWorld() {

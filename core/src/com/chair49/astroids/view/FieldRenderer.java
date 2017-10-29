@@ -20,7 +20,7 @@ public class FieldRenderer {
         // Creates new camera object, needed for the shape renderer
         cam = new OrthographicCamera();
         cam.setToOrtho(false, 16, 9);
-
+        debugRenderer = new Box2DDebugRenderer();
 
     }
 
@@ -29,6 +29,5 @@ public class FieldRenderer {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         debugRenderer.render(model.getWorld(), cam.combined);
-
     }
 }
