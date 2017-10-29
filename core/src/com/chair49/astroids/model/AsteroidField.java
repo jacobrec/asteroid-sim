@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
+import com.chair49.astroids.controller.AsteroidFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,10 +32,9 @@ public class AsteroidField {
         for (int i = 0; i < asteroidCount; i++) {
             float x = MathUtils.random(worldWidth);
             float y = MathUtils.random(worldHeight);
-            Asteroid asteroid = new Asteroid(world, new Vector2(x, y), MathUtils.random(1f, 3f));
             float vx = MathUtils.random(-3f,3f);
             float vy = MathUtils.random(-3f,3f);
-            asteroid.setVelocity(new Vector2(vx, vy));
+            Asteroid asteroid = AsteroidFactory.getAsteroid(world, new Vector2(vx, vy),new Vector2(x, y), MathUtils.random(1f, 3f));
             asteroids.add(asteroid);
         }
     }
