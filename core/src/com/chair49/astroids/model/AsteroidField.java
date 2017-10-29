@@ -27,7 +27,7 @@ public class AsteroidField {
     public final static float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
 
     HashMap<Body, Asteroid> bodyToAsteroid;
-    Shuttle shuttle;
+    public Shuttle shuttle;
 
     public AsteroidField(int asteroidCount) {
         this.asteroidCount = asteroidCount;

@@ -39,7 +39,7 @@ public class Asteroid extends Collidable {
         final int pointCount = 8;
         Vector2[] points = new Vector2[pointCount];
         for (int i = 0; i < pointCount; i++) {
-            points[i] = randomPoint(radius/10, (float) (i * Math.PI / 4));
+            points[i] = randomPoint(radius, (float) (i * Math.PI / 4));
         }
         PolygonShape polygon = new PolygonShape();
         polygon.set(points);
@@ -48,14 +48,14 @@ public class Asteroid extends Collidable {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
         fixtureDef.density = density;
-        fixtureDef.friction = MathUtils.random(0.1f, 5f);
-        fixtureDef.restitution = MathUtils.random(0.1f, 0.9f); // Make it bounce a little bit
+        fixtureDef.friction = 0.7f;
+        fixtureDef.restitution = 0.1f; // Make it bounce a little bit
         body.createFixture(fixtureDef);
     }
 
     // Returns a random point
     public Vector2 randomPoint(float radius, float angle) {
-        radius = radius + MathUtils.random(-1f, 1f);
+        radius = radius + MathUtils.random(-radius/3, radius/3);
         return new Vector2(radius * MathUtils.cos(angle), radius * MathUtils.sin(angle));
     }
 
