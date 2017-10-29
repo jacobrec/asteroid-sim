@@ -21,7 +21,7 @@ public class AsteroidField {
 
 
     World world;
-    final int asteroidCount = 20;
+    int asteroidCount;
     public final static float worldWidth = 16f;
     public final static float worldHeight = 9f;
     // Ratio between Gdx world measurements and coordinate system.
@@ -29,16 +29,17 @@ public class AsteroidField {
 
     HashMap<Body, Asteroid> bodyToAsteroid;
 
-    public AsteroidField() {
+    public AsteroidField(int asteroidCount) {
+        this.asteroidCount = asteroidCount;
         // Linked list because we will mainly be iterating the entire array as well as adding and removing from random indices
         asteroids = new LinkedList<Asteroid>();
         asteroidsToAdd = new LinkedList<LightWeightAstroidThingy>();
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
         bodyToAsteroid = new HashMap<Body, Asteroid>();
-
     }
-    public void addAsteroid(Asteroid a){
+
+    public void addAsteroid(Asteroid a) {
         bodyToAsteroid.put(a.getBody(), a);
         asteroids.add(a);
     }

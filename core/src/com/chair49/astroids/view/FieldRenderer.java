@@ -3,6 +3,10 @@ package com.chair49.astroids.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +23,9 @@ public class FieldRenderer {
     ShapeRenderer sr;
     Box2DDebugRenderer debug;
 
+    Batch batch;
+    BitmapFont font;
+
     public FieldRenderer() {
         // Creates new camera object, needed for the shape renderer
         cam = new OrthographicCamera();
@@ -28,22 +35,32 @@ public class FieldRenderer {
         sr.setProjectionMatrix(cam.combined);
 
         debug = new Box2DDebugRenderer();
-
-        //sr.setColor(0.2f, 0.2f, 0.2f, 1);
         sr.setColor(0.2f, 1f, 0.2f, 1);
 
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("cmunbl.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 100;
+        font = generator.generateFont(parameter);
+        generator.dispose();
+        batch = new SpriteBatch();
     }
 
     public void render(AsteroidField model, float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-
         sr.begin(ShapeRenderer.ShapeType.Line);
-        for (Asteroid ast : model.asteroids) {
-            drawAsteroid(ast);
+        for (Asteroid asteroid : model.asteroids) {
+            drawAsteroid(asteroid);
         }
         sr.end();
+
+        // Render text
+        batch.setColor(1f, 0f, 0f, 1f);
+        batch.begin();
+        font.draw(batch, String.valueOf(model.getAsteroidCount()), 25, 100);
+        batch.end();
+
         debug.render(model.getWorld(), cam.combined);
     }
 
