@@ -29,6 +29,8 @@ public class FieldRenderer {
 
         debug = new Box2DDebugRenderer();
 
+        sr.setColor(0.2f,0.2f,0.2f,1);
+
     }
 
     public void render(AsteroidField model, float delta) {
@@ -42,7 +44,7 @@ public class FieldRenderer {
             drawAsteroid(ast);
         }
         sr.end();
-        //debug.render(model.getWorld(), cam.combined);
+        debug.render(model.getWorld(), cam.combined);
     }
 
     private void drawAsteroid(Asteroid ast) {
