@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.*;
  */
 public class Asteroid extends Collidable {
     float density = MathUtils.random(0.1f, 5f);
-
+    public float area;
     public boolean killMe;
 
     public Asteroid(World world, Vector2 position, float area, Vector2 momentum) {
@@ -17,6 +17,7 @@ public class Asteroid extends Collidable {
     }
 
     public void reset(World world, Vector2 position, float area, Vector2 momentum) {
+        this.area = area;
         // Create the body for our asteroid
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -38,7 +39,7 @@ public class Asteroid extends Collidable {
         final int pointCount = 8;
         Vector2[] points = new Vector2[pointCount];
         for (int i = 0; i < pointCount; i++) {
-            points[i] = randomPoint(radius, (float) (i * Math.PI / 4));
+            points[i] = randomPoint(radius/10, (float) (i * Math.PI / 4));
         }
         PolygonShape polygon = new PolygonShape();
         polygon.set(points);

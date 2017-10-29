@@ -39,10 +39,9 @@ public class FieldController {
     }
 
     private void addNewAstroids(AsteroidField model) {
-        for(LightWeightAstroidThingy a : model.asteroidsToAdd){
-            model.addAsteroid(AsteroidFactory.getAsteroid(a));
+        for(int i = model.asteroidsToAdd.size()-1; i >= 0; i--){
+            model.addAsteroid(AsteroidFactory.getAsteroid(model.asteroidsToAdd.remove(i)));
         }
-        model.asteroidsToAdd.clear();
     }
 
     private void removeDeadAsteroids(AsteroidField model) {
