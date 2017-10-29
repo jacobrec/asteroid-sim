@@ -11,7 +11,7 @@ public class Asteroid extends Collidable {
     float density = MathUtils.random(0.1f, 5f);
     public float area;
     public boolean killMe;
-    public float timeAlive;
+    public float timeAlive = 0;
 
     public Asteroid(World world, Vector2 position, float area, Vector2 momentum) {
         reset(world, position, area, momentum);
@@ -32,7 +32,7 @@ public class Asteroid extends Collidable {
         createAsteroidShape(body, radius);
 
         // Using the momentum, density, and area, calculate the new velocity.
-        Vector2 velocity = new Vector2(momentum.x / (density * area), momentum.y / (density * area));
+        Vector2 velocity = new Vector2(momentum.x , momentum.y );
         setVelocity(velocity);
     }
 

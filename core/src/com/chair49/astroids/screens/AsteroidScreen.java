@@ -14,7 +14,7 @@ public class AsteroidScreen implements Screen {
     FieldController controller;
     AsteroidField model;
     FieldRenderer view;
-    int asteroidCount = 10;
+    int asteroidCount = 20;
 
     @Override
     public void show() {
