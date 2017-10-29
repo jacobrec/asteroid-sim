@@ -3,10 +3,12 @@ package com.chair49.astroids.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 import com.chair49.astroids.controller.AsteroidFactory;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,13 +24,19 @@ public class AsteroidField {
     // Ratio between Gdx world measurements and coordinate system.
     public final static float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
 
+    HashMap<Body, Asteroid> bodyToAsteroid;
+
     public AsteroidField() {
         // Linked list because we will mainly be iterating the entire array as well as adding and removing from random indices
         asteroids = new LinkedList<Asteroid>();
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
+        bodyToAsteroid = new HashMap<Body, Asteroid>();
 
-
+    }
+    public void addAsteroid(Asteroid a){
+        bodyToAsteroid.put(a.getBody(), a);
+        asteroids.add(a);
     }
 
     public World getWorld() {
@@ -49,6 +57,10 @@ public class AsteroidField {
 
     public int getAsteroidCount() {
         return asteroidCount;
+    }
+
+    public Asteroid getAsteroidFromBody(Body b2) {
+        return bodyToAsteroid.get(b2);
     }
 }
 

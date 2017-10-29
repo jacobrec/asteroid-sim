@@ -20,10 +20,10 @@ public class FieldController {
             float y = MathUtils.random(AsteroidField.worldHeight);
             float vx = MathUtils.random(-3f,3f);
             float vy = MathUtils.random(-3f,3f);
-            Asteroid asteroid = AsteroidFactory.getAsteroid(model.getWorld(), new Vector2(vx, vy),new Vector2(x, y), MathUtils.random(1f, 3f));
-            model.asteroids.add(asteroid);
+            Asteroid asteroid = AsteroidFactory.getAsteroid(model.getWorld(), new Vector2(vx, vy),new Vector2(x, y), MathUtils.random(0.5f, 1f));
+            model.addAsteroid(asteroid);
         }
-        model.getWorld().setContactListener(new Destructor3000());
+        model.getWorld().setContactListener(new Destructor3000(model));
     }
 
     public void update(AsteroidField model, float delta) {
