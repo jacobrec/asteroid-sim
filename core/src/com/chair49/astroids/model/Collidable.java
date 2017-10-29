@@ -24,4 +24,59 @@ public abstract class Collidable {
 
     List<Fixture> segments;
 
+    public Polygon getCollisionPolygon() {
+        return collision;
+    }
+
+    public Rectangle getBoundingBox() {
+        return boundingBox;
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public Vector2 getAcceleration() {
+        return acceleration;
+    }
+
+    public double getMass() {
+        return mass;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public List<Fixture> getSegments() {
+        return segments;
+    }
+
+    public void setCollisionPolygon(Polygon collision) {
+        this.collision = collision;
+    }
+
+    public void setBoundingBox(Rectangle boundingBox) {
+        this.boundingBox = boundingBox;
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
+    }
+
+    public void setAcceleration(Vector2 acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setMass(double mass) {
+        this.mass = mass;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
+
+    public void setSegments(List<Fixture> segments) {
+        this.segments = segments;
+    }
 }
