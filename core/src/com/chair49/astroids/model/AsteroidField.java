@@ -1,5 +1,7 @@
 package com.chair49.astroids.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
@@ -13,11 +15,32 @@ import java.util.List;
 public class AsteroidField {
     public List<Asteroid> asteroids;
     World world;
+    final int asteroidCount = 5;
+    final float worldWidth = 16;
+    final float worldHeight = 9;
+    // Ratio between Gdx world measurements and worldWidth/worldHeight.
+    final float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
 
-    public AsteroidField(){
+    public AsteroidField() {
         // Linked list because we will mainly be iterating the entire array as well as adding and removing from random locations
         asteroids = new LinkedList<Asteroid>();
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
+
+
+        for (int i = 0; i < asteroidCount; i++) {
+            float x = MathUtils.random(worldWidth);
+            float y = MathUtils.random(worldHeight);
+            Asteroid asteroid = new Asteroid(world, new Vector2(x, y));
+            asteroids.add(asteroid);
+        }
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public float getBoxToWorld() {
+        return boxToWorld;
     }
 }
