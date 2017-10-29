@@ -1,6 +1,8 @@
 # Asteroids Simulator
 *Created by Jacob Reckhard and Kyle Hennig*
 
+As part of the 2017 University of Alberta Engineering contest, we had 6 hours to create the working code and put together a presentation.
+
 ## Program Requirements
 
 ### Part 1
