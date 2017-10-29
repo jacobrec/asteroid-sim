@@ -1,8 +1,13 @@
 package com.chair49.astroids.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.chair49.astroids.model.Asteroid;
 import com.chair49.astroids.model.AsteroidField;
+import javafx.scene.input.KeyCode;
 
 /**
  * Created by jacob on 29/10/17.
@@ -18,6 +24,9 @@ public class FieldRenderer {
     OrthographicCamera cam;
     ShapeRenderer sr;
     Box2DDebugRenderer debug;
+
+    Batch batch;
+    BitmapFont font12;
 
     public FieldRenderer() {
         // Creates new camera object, needed for the shape renderer
@@ -32,6 +41,12 @@ public class FieldRenderer {
         //sr.setColor(0.2f, 0.2f, 0.2f, 1);
         sr.setColor(0.2f, 1f, 0.2f, 1);
 
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("cmunbl.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 12;
+        font12 = generator.generateFont(parameter);
+        generator.dispose();
+        batch = new SpriteBatch();
     }
 
     public void render(AsteroidField model, float delta) {
@@ -40,10 +55,25 @@ public class FieldRenderer {
 
 
         sr.begin(ShapeRenderer.ShapeType.Line);
-        for (Asteroid ast : model.asteroids) {
-            drawAsteroid(ast);
+        for (Asteroid asteroid : model.asteroids) {
+            drawAsteroid(asteroid);
         }
+        // Draw the interface for selecting the number of asteroids to display
+        sr.identity();
+        sr.line(0.5f, 0.5f, 15.5f, 0.5f);
         sr.end();
+        // Render circle
+        sr.begin(ShapeRenderer.ShapeType.Filled);
+        sr.circle(1, 0.5f, 0.2f, 30);
+        sr.end();
+        // Render text
+        batch.setColor(1f, 1f, 1f, 1f);
+
+
+        batch.begin();
+        font12.draw(batch, "Hello", 1, 1);
+        batch.end();
+
         debug.render(model.getWorld(), cam.combined);
     }
 
