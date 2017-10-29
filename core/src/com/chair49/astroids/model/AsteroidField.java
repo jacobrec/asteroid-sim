@@ -32,6 +32,9 @@ public class AsteroidField {
             float x = MathUtils.random(worldWidth);
             float y = MathUtils.random(worldHeight);
             Asteroid asteroid = new Asteroid(world, new Vector2(x, y));
+            float vx = MathUtils.random(3f);
+            float vy = MathUtils.random(3f);
+            asteroid.setVelocity(new Vector2(vx, vy));
             asteroids.add(asteroid);
         }
     }

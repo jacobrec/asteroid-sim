@@ -37,4 +37,8 @@ public class Asteroid extends Collidable {
         fixtureDef.restitution = 0.6f; // Make it bounce a little bit
         return body.createFixture(fixtureDef);
     }
+
+    public void setVelocity(Vector2 velocity) {
+        this.body.setLinearVelocity(velocity);
+    }
 }
