@@ -37,9 +37,9 @@ public class Destructor3000 implements ContactListener {
             a1.killMe = true;
             a2.killMe = true;
 
-            LightWeightAstroidThingy a3 = new LightWeightAstroidThingy(model.getWorld(), a1.getBody().getLinearVelocity().scl(a1.area).scl(0.1f).add(0.5f, 0.5f), a1.getBody().getPosition().add(0.2f, 0.2f), a1.area / 5);
-            LightWeightAstroidThingy a4 = new LightWeightAstroidThingy(model.getWorld(), a1.getBody().getLinearVelocity().scl(a1.area).scl(0.1f).add(-0.5f, -0.5f), a1.getBody().getPosition().add(-0.2f, -0.2f), a1.area / 5);
-            LightWeightAstroidThingy a5 = new LightWeightAstroidThingy(model.getWorld(), a2.getBody().getLinearVelocity().scl(a2.area).scl(0.1f).add(0.5f, 0.5f), a2.getBody().getPosition(), a2.area / 5);
+            LightWeightAstroidThingy a3 = new LightWeightAstroidThingy(model.getWorld(), a1.getBody().getLinearVelocity().scl(a1.area).add(0.5f, 0.5f).scl(0.1f), a1.getBody().getPosition().add(0.2f, 0.2f), a1.area / 5);
+            LightWeightAstroidThingy a4 = new LightWeightAstroidThingy(model.getWorld(), a1.getBody().getLinearVelocity().scl(a1.area).add(-0.5f, -0.5f).scl(0.1f), a1.getBody().getPosition().add(-0.2f, -0.2f), a1.area / 5);
+            LightWeightAstroidThingy a5 = new LightWeightAstroidThingy(model.getWorld(), a2.getBody().getLinearVelocity().scl(a2.area).add(0.5f, 0.5f).scl(0.1f), a2.getBody().getPosition(), a2.area / 5);
 
 
             model.asteroidsToAdd.add(a3);

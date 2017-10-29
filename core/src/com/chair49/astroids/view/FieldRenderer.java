@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.chair49.astroids.model.Asteroid;
 import com.chair49.astroids.model.AsteroidField;
+import com.chair49.astroids.model.Shuttle;
 
 /**
  * Created by jacob on 29/10/17.
@@ -55,13 +56,38 @@ public class FieldRenderer {
         }
         sr.end();
 
+        sr.begin(ShapeRenderer.ShapeType.Filled);
+            drawShuttle(model.shuttle);
+        sr.end();
+
         // Render asteroid count
         batch.setColor(1f, 0f, 0f, 1f);
         batch.begin();
         font.draw(batch, String.valueOf(model.getAsteroidCount()), 25, 100);
         batch.end();
 
-        debug.render(model.getWorld(), cam.combined);
+        //debug.render(model.getWorld(), cam.combined);
+    }
+
+    private void drawShuttle(Shuttle asteroid) {
+        for (int i = 0; i < asteroid.getBody().getFixtureList().size; i++) {
+            PolygonShape shape = (PolygonShape) asteroid.getBody().getFixtureList().get(i).getShape();
+            float[] vertices = new float[shape.getVertexCount() * 2];
+
+            Vector2 point = new Vector2();
+            for (int j = 0; j < shape.getVertexCount(); j++) {
+                shape.getVertex(j, point);
+                vertices[2 * j] = point.x;
+                vertices[2 * j + 1] = point.y;
+            }
+            Vector2 position = asteroid.getBody().getPosition();
+            float angle = asteroid.getBody().getAngle();
+
+            sr.identity();
+            sr.translate(position.x, position.y, 0);
+            sr.rotate(0, 0, 1, angle * MathUtils.radiansToDegrees);
+            sr.triangle(vertices[0], vertices[1], vertices[2], vertices[3], vertices[4], vertices[5]);
+        }
     }
 
     private void drawAsteroid(Asteroid asteroid) {
