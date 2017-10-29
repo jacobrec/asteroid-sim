@@ -11,12 +11,14 @@ public class Asteroid extends Collidable {
     float density = MathUtils.random(0.1f, 5f);
     public float area;
     public boolean killMe;
+    float timeAlive;
 
     public Asteroid(World world, Vector2 position, float area, Vector2 momentum) {
         reset(world, position, area, momentum);
     }
 
     public void reset(World world, Vector2 position, float area, Vector2 momentum) {
+        timeAlive = 0;
         this.area = area;
         // Create the body for our asteroid
         BodyDef bodyDef = new BodyDef();
