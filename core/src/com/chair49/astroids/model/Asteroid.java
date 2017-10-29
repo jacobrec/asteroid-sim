@@ -25,36 +25,25 @@ public class Asteroid extends Collidable {
         // Set our body's starting position in the world
         bodyDef.position.set(position);
         body = world.createBody(bodyDef);
-        createFixtures(body, 5);
+        createFixtures(body);
     }
 
-    private void createFixtures(Body body, int numberOfFixtures) {
-        List<Vector2> points = new LinkedList<Vector2>();
-        points.add(randomPoint());
-        points.add(randomPoint());
-
-        // Create subsequent fixtures using two of the previous points
-        for (int i = 0; i < numberOfFixtures; i++) {
-            Vector2 randomPoint = randomPoint();
-            while (!pointIsValid(randomPoint, points)) {
-                randomPoint = randomPoint();
-            }
-            points.add(randomPoint);
-
-            // Last 2 points added
-            Vector2[] vertices = new Vector2[3];
-            vertices = points.subList(points.size() - 3, points.size()).toArray(vertices);
-            PolygonShape triangle = new PolygonShape();
-            triangle.set(vertices);
-
-            // Create the next fixture
-            FixtureDef fixtureDef = new FixtureDef();
-            fixtureDef.shape = triangle;
-            fixtureDef.density = MathUtils.random(0.1f, 5f);
-            fixtureDef.friction = MathUtils.random(0.1f, 5f);
-            fixtureDef.restitution = MathUtils.random(0.1f, 0.9f); // Make it bounce a little bit
-            segments.add(body.createFixture(fixtureDef));
+    private void createFixtures(Body body) {
+        final int pointCount = 8;
+        Vector2[] points = new Vector2[pointCount];
+        for (int i = 0; i < pointCount; i++) {
+            points[i] = randomPoint();
         }
+        PolygonShape polygon = new PolygonShape();
+        polygon.set(points);
+
+        // Create the next fixture
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = polygon;
+        fixtureDef.density = MathUtils.random(0.1f, 5f);
+        fixtureDef.friction = MathUtils.random(0.1f, 5f);
+        fixtureDef.restitution = MathUtils.random(0.1f, 0.9f); // Make it bounce a little bit
+        segments.add(body.createFixture(fixtureDef));
     }
 
     public Vector2 randomPoint() {
@@ -63,27 +52,5 @@ public class Asteroid extends Collidable {
 
     public void setVelocity(Vector2 velocity) {
         this.body.setLinearVelocity(velocity);
-    }
-
-    // Check if the point is outside of the asteroid's shape
-    private boolean pointIsValid(Vector2 point, List<Vector2> points) {
-        for (int i = 0; i < points.size() - 2; i++) {
-            if (pointInTriangle(point, points.get(i), points.get(i + 1), points.get(i + 2))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // Check if a point is in a triangle
-    private boolean pointInTriangle(Vector2 point, Vector2 a, Vector2 b, Vector2 c) {
-        boolean bool = (b.x - a.x) * point.y - (b.y - a.y) * point.x > 0;
-        if ((c.x - a.x) * point.y - (c.y - a.y) * point.x > 0 == bool) {
-            return false;
-        }
-        if ((c.x - b.x) * (point.y - b.y) - (c.y - b.y) * (point.x - b.x) > 0 != bool) {
-            return false;
-        }
-        return true;
     }
 }
