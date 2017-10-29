@@ -17,6 +17,9 @@ import java.util.List;
  */
 public class AsteroidField {
     public List<Asteroid> asteroids;
+    public List<LightWeightAstroidThingy> asteroidsToAdd;
+
+
     World world;
     final int asteroidCount = 100;
     public final static float worldWidth = 16f;
@@ -29,6 +32,7 @@ public class AsteroidField {
     public AsteroidField() {
         // Linked list because we will mainly be iterating the entire array as well as adding and removing from random indices
         asteroids = new LinkedList<Asteroid>();
+        asteroidsToAdd = new LinkedList<LightWeightAstroidThingy>();
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
         bodyToAsteroid = new HashMap<Body, Asteroid>();
@@ -63,4 +67,5 @@ public class AsteroidField {
         return bodyToAsteroid.get(b2);
     }
 }
+
 

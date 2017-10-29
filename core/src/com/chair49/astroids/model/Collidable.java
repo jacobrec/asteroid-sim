@@ -1,5 +1,6 @@
 package com.chair49.astroids.model;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 /**

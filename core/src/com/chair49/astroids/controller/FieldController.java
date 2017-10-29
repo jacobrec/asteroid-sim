@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.chair49.astroids.model.Asteroid;
 import com.chair49.astroids.model.AsteroidField;
+import com.chair49.astroids.model.LightWeightAstroidThingy;
+
+import java.util.List;
 
 /**
  * Created by jacob on 29/10/17.
@@ -11,6 +14,8 @@ import com.chair49.astroids.model.AsteroidField;
 public class FieldController {
     // Max distance off screen asteroids are allowed to travel
     final private int padding = 5;
+
+
 
     public FieldController(AsteroidField model){
 
@@ -29,6 +34,23 @@ public class FieldController {
     public void update(AsteroidField model, float delta) {
         model.getWorld().step(delta, 6, 2);
         repositionOffscreenAsteroids(model);
+        removeDeadAsteroids(model);
+        addNewAstroids(model);
+    }
+
+    private void addNewAstroids(AsteroidField model) {
+        for(LightWeightAstroidThingy a : model.asteroidsToAdd){
+            model.addAsteroid(AsteroidFactory.getAsteroid(a));
+        }
+        model.asteroidsToAdd.clear();
+    }
+
+    private void removeDeadAsteroids(AsteroidField model) {
+        for(int i = model.asteroids.size()-1; i >= 0; i--){
+            if(model.asteroids.get(i).killMe){
+                AsteroidFactory.recycle(model.asteroids.remove(i));
+            }
+        }
     }
 
 

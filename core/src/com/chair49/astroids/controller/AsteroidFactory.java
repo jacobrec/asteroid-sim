@@ -3,6 +3,7 @@ package com.chair49.astroids.controller;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.chair49.astroids.model.Asteroid;
+import com.chair49.astroids.model.LightWeightAstroidThingy;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -49,5 +50,8 @@ public class AsteroidFactory {
         for (int i = 0; i < a.getBody().getFixtureList().size; i++) {
             a.getBody().destroyFixture(a.getBody().getFixtureList().get(i));
         }
+    }
+
+    public static Asteroid getAsteroid(LightWeightAstroidThingy a) {
     }
 }

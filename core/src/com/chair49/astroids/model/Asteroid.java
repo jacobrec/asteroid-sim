@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class Asteroid extends Collidable {
 
+    public boolean killMe;
+
     public Asteroid(World world, Vector2 position, float area, Vector2 momentum) {
         reset(world, position, area, momentum);
     }
@@ -24,6 +26,7 @@ public class Asteroid extends Collidable {
         bodyDef.position.set(position);
         body = world.createBody(bodyDef);
         createFixtures(body);
+        killMe = false;
     }
 
     private void createFixtures(Body body) {
