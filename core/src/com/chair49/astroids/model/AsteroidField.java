@@ -17,10 +17,10 @@ public class AsteroidField {
     public List<Asteroid> asteroids;
     World world;
     final int asteroidCount = 100;
-    final float worldWidth = 16f;
-    final float worldHeight = 9f;
+    public final static float worldWidth = 16f;
+    public final static float worldHeight = 9f;
     // Ratio between Gdx world measurements and coordinate system.
-    final float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
+    public final static float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
 
     public AsteroidField() {
         // Linked list because we will mainly be iterating the entire array as well as adding and removing from random indices
@@ -28,15 +28,7 @@ public class AsteroidField {
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
 
-        // Create the asteroids with random positions and velocities
-        for (int i = 0; i < asteroidCount; i++) {
-            float x = MathUtils.random(worldWidth);
-            float y = MathUtils.random(worldHeight);
-            float vx = MathUtils.random(-3f,3f);
-            float vy = MathUtils.random(-3f,3f);
-            Asteroid asteroid = AsteroidFactory.getAsteroid(world, new Vector2(vx, vy),new Vector2(x, y), MathUtils.random(1f, 3f));
-            asteroids.add(asteroid);
-        }
+
     }
 
     public World getWorld() {
@@ -53,6 +45,10 @@ public class AsteroidField {
 
     public float getBoxToWorld() {
         return boxToWorld;
+    }
+
+    public int getAsteroidCount() {
+        return asteroidCount;
     }
 }
 

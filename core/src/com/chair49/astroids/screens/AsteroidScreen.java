@@ -16,7 +16,7 @@ public class AsteroidScreen implements Screen {
     @Override
     public void show() {
         model = new AsteroidField();
-        controller = new FieldController();
+        controller = new FieldController(model);
         view = new FieldRenderer();
     }
 

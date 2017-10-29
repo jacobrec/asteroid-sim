@@ -1,5 +1,6 @@
 package com.chair49.astroids.controller;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.chair49.astroids.model.Asteroid;
 import com.chair49.astroids.model.AsteroidField;
@@ -9,11 +10,31 @@ import com.chair49.astroids.model.AsteroidField;
  */
 public class FieldController {
     // Max distance off screen asteroids are allowed to travel
-    int padding = 5;
+    final private int padding = 5;
+
+    public FieldController(AsteroidField model){
+
+        // Create the asteroids with random positions and velocities
+        for (int i = 0; i < model.getAsteroidCount(); i++) {
+            float x = MathUtils.random(AsteroidField.worldWidth);
+            float y = MathUtils.random(AsteroidField.worldHeight);
+            float vx = MathUtils.random(-3f,3f);
+            float vy = MathUtils.random(-3f,3f);
+            Asteroid asteroid = AsteroidFactory.getAsteroid(model.getWorld(), new Vector2(vx, vy),new Vector2(x, y), MathUtils.random(1f, 3f));
+            model.asteroids.add(asteroid);
+        }
+
+    }
 
     public void update(AsteroidField model, float delta) {
         model.getWorld().step(delta, 6, 2);
 
+        repositionOffscreenAsteroids(model);
+
+    }
+
+
+    private void repositionOffscreenAsteroids(AsteroidField model) {
         // Check for asteroids that are out of bounds and travelling away from the screen
         // Then wrap them to the opposite side of the world
         for (Asteroid asteroid : model.asteroids) {
