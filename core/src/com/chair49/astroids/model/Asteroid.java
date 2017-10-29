@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class Asteroid extends Collidable {
 
-    public Asteroid(World world, Vector2 position, float area) {
+    public Asteroid(World world, Vector2 position, float area, Vector2 momentum) {
         segments = new LinkedList<Fixture>();
-        reset(world, position, area);
+        reset(world, position, area, momentum);
     }
 
-    public void reset(World world, Vector2 position, float area) {
+    public void reset(World world, Vector2 position, float area, Vector2 momentum) {
         segments.clear();
 
         BodyDef bodyDef = new BodyDef();
