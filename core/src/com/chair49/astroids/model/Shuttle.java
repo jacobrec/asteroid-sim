@@ -17,14 +17,17 @@ public class Shuttle extends Collidable {
         bodyDef.position.set(position);
         body = world.createBody(bodyDef);
         createShuttle(body);
+
+        this.body.setAngularDamping(2f);
+        this.body.setLinearDamping(0.4f);
     }
 
-    // Create a polygon to represent the asteroid
+    // Create a polygon to represent the shuttle
     private void createShuttle(Body body) {
         Vector2[] points = new Vector2[3];
         points[0] = new Vector2(0, 0);
-        points[1] = new Vector2(-0.25f, -0.5f);
-        points[2] = new Vector2(0.25f, -0.5f);
+        points[1] = new Vector2(-0.25f, -1f);
+        points[2] = new Vector2(0.25f, -1f);
 
         PolygonShape polygon = new PolygonShape();
         polygon.set(points);
@@ -32,10 +35,31 @@ public class Shuttle extends Collidable {
         // Create the next fixture
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;
-        fixtureDef.density = 5f;
+        fixtureDef.density = 4f;
         fixtureDef.friction = MathUtils.random(0.1f, 5f);
         fixtureDef.restitution = MathUtils.random(0.1f, 0.9f); // Make it bounce a little bit
         body.createFixture(fixtureDef);
+    }
+
+    /**
+     * Applies ships rotational thrusters
+     *
+     * @param amount of torque in newton meters, positive turns clockwise
+     */
+    public void applyTurnThrusters(float amount) {
+        this.body.applyTorque(amount, true);
+
+    }
+
+    /**
+     * Applies ships rear thrusters
+     *
+     * @param amount of force in newtons
+     */
+    public void applyRearThrusters(float amount) {
+        Vector2 v = new Vector2(0, amount);
+        v.rotate(this.body.getAngle() * MathUtils.radiansToDegrees);
+        this.body.applyForceToCenter(v, true);
     }
 
     // Set the velocity of the asteroid

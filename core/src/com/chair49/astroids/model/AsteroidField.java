@@ -1,12 +1,10 @@
 package com.chair49.astroids.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
-import com.chair49.astroids.controller.AsteroidFactory;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -16,30 +14,19 @@ import java.util.List;
  * Created by jacob on 29/10/17.
  */
 public class AsteroidField {
-    public List<Asteroid> asteroids;
-    public List<LightWeightAstroidThingy> asteroidsToAdd;
-
-    World world;
-    int asteroidCount;
     public final static float worldWidth = 16f;
     public final static float worldHeight = 9f;
     // Ratio between Gdx world measurements and coordinate system.
     public final static float boxToWorld = Gdx.graphics.getWidth() / worldWidth;
-
-    HashMap<Body, Asteroid> bodyToAsteroid;
+    public List<Asteroid> asteroids;
+    public List<LightWeightAstroidThingy> asteroidsToAdd;
     public Shuttle shuttle;
+    World world;
+    int asteroidCount;
+    HashMap<Body, Asteroid> bodyToAsteroid;
 
-    public AsteroidField(int asteroidCount) {
-        this.asteroidCount = asteroidCount;
-        // Linked list because we will mainly be iterating the entire array as well as adding and removing from random indices
-        asteroids = new LinkedList<Asteroid>();
-        asteroidsToAdd = new LinkedList<LightWeightAstroidThingy>();
-        Box2D.init();
-        world = new World(new Vector2(0, 0), true);
-        bodyToAsteroid = new HashMap<Body, Asteroid>();
+    public AsteroidField() {
 
-        // Create the shuttle
-        shuttle = new Shuttle(world);
     }
 
     public void addAsteroid(Asteroid a) {
@@ -69,6 +56,19 @@ public class AsteroidField {
 
     public Asteroid getAsteroidFromBody(Body b2) {
         return bodyToAsteroid.get(b2);
+    }
+
+    public void setup(int asteroidCount) {
+        this.asteroidCount = asteroidCount;
+        // Linked list because we will mainly be iterating the entire array as well as adding and removing from random indices
+        asteroids = new LinkedList<Asteroid>();
+        asteroidsToAdd = new LinkedList<LightWeightAstroidThingy>();
+        Box2D.init();
+        world = new World(new Vector2(0, 0), true);
+        bodyToAsteroid = new HashMap<Body, Asteroid>();
+
+        // Create the shuttle
+        shuttle = new Shuttle(world);
     }
 }
 

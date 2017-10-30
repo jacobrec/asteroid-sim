@@ -5,9 +5,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.chair49.astroids.model.Asteroid;
 import com.chair49.astroids.model.LightWeightAstroidThingy;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by jacob on 29/10/17.
@@ -53,6 +51,6 @@ public class AsteroidFactory {
     }
 
     public static Asteroid getAsteroid(LightWeightAstroidThingy a) {
-        return getAsteroid(a.w,a.momentum,a.position,a.area);
+        return getAsteroid(a.w, a.momentum, a.position, a.area);
     }
 }

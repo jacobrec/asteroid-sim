@@ -4,29 +4,28 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.chair49.astroids.model.Asteroid;
 import com.chair49.astroids.model.AsteroidField;
-import com.chair49.astroids.model.LightWeightAstroidThingy;
-import com.chair49.astroids.model.Shuttle;
-
-import java.util.List;
 
 /**
  * Created by jacob on 29/10/17.
  */
 public class FieldController {
-    // Max distance off screen asteroids are allowed to travel
-    final private int padding = 5;
+    public int asteroidCount = 20;
 
-    public FieldController(AsteroidField model){
+    public void setupWorld(AsteroidField model) {
         // Create the asteroids with random positions and velocities
+        model.setup(asteroidCount);
+
         for (int i = 0; i < model.getAsteroidCount(); i++) {
             float x = MathUtils.random(AsteroidField.worldWidth);
             float y = MathUtils.random(AsteroidField.worldHeight);
-            float vx = MathUtils.random(-3f,3f);
-            float vy = MathUtils.random(-3f,3f);
-            Asteroid asteroid = AsteroidFactory.getAsteroid(model.getWorld(), new Vector2(vx, vy),new Vector2(x, y), MathUtils.random(0.5f, 1f));
+            float vx = MathUtils.random(-3f, 3f);
+            float vy = MathUtils.random(-3f, 3f);
+            Asteroid asteroid = AsteroidFactory.getAsteroid(model.getWorld(), new Vector2(vx, vy), new Vector2(x, y), MathUtils.random(0.5f, 1f));
             model.addAsteroid(asteroid);
         }
         model.getWorld().setContactListener(new Destructor3000(model));
+
+
     }
 
     public void update(AsteroidField model, float delta) {
@@ -34,20 +33,21 @@ public class FieldController {
         repositionOffscreenAsteroids(model);
         removeDeadAsteroids(model);
         addNewAstroids(model);
-        for(Asteroid a : model.asteroids){
+        for (Asteroid a : model.asteroids) {
             a.timeAlive += delta;
         }
+
     }
 
     private void addNewAstroids(AsteroidField model) {
-        for(int i = model.asteroidsToAdd.size()-1; i >= 0; i--){
+        for (int i = model.asteroidsToAdd.size() - 1; i >= 0; i--) {
             model.addAsteroid(AsteroidFactory.getAsteroid(model.asteroidsToAdd.remove(i)));
         }
     }
 
     private void removeDeadAsteroids(AsteroidField model) {
-        for(int i = model.asteroids.size()-1; i >= 0; i--){
-            if(model.asteroids.get(i).killMe){
+        for (int i = model.asteroids.size() - 1; i >= 0; i--) {
+            if (model.asteroids.get(i).killMe) {
                 AsteroidFactory.recycle(model.asteroids.remove(i));
             }
         }
@@ -62,6 +62,7 @@ public class FieldController {
             Vector2 velocity = asteroid.getBody().getLinearVelocity();
 
             // Horizontal bounds
+            int padding = 5;
             float minX = -padding;
             float maxX = model.getWorldWidth() + padding;
             if (position.x < minX && velocity.x < 0) {

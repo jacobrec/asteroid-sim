@@ -3,10 +3,6 @@ package com.chair49.astroids.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -24,8 +20,6 @@ public class FieldRenderer {
     ShapeRenderer sr;
     Box2DDebugRenderer debug;
 
-    Batch batch;
-    BitmapFont font;
 
     public FieldRenderer() {
         // Creates new camera object, needed for the shape renderer
@@ -38,12 +32,6 @@ public class FieldRenderer {
         debug = new Box2DDebugRenderer();
         sr.setColor(0.2f, 1f, 0.2f, 1);
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("cmunbl.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 100;
-        font = generator.generateFont(parameter);
-        generator.dispose();
-        batch = new SpriteBatch();
     }
 
     public void render(AsteroidField model, float delta) {
@@ -57,14 +45,9 @@ public class FieldRenderer {
         sr.end();
 
         sr.begin(ShapeRenderer.ShapeType.Filled);
-            drawShuttle(model.shuttle);
+        drawShuttle(model.shuttle);
         sr.end();
 
-        // Render asteroid count
-        batch.setColor(1f, 0f, 0f, 1f);
-        batch.begin();
-        font.draw(batch, String.valueOf(model.getAsteroidCount()), 25, 100);
-        batch.end();
 
         //debug.render(model.getWorld(), cam.combined);
     }

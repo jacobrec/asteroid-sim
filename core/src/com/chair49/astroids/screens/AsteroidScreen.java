@@ -1,11 +1,12 @@
 package com.chair49.astroids.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.chair49.astroids.controller.FieldController;
+import com.chair49.astroids.input.DesktopInput;
+import com.chair49.astroids.input.Input;
 import com.chair49.astroids.model.AsteroidField;
 import com.chair49.astroids.view.FieldRenderer;
+import com.chair49.astroids.view.GUI;
 
 /**
  * Created by jacob on 29/10/17.
@@ -14,30 +15,30 @@ public class AsteroidScreen implements Screen {
     FieldController controller;
     AsteroidField model;
     FieldRenderer view;
-    int asteroidCount = 20;
+    GUI gui;
+
+    Input input;
+
 
     @Override
     public void show() {
-        model = new AsteroidField(asteroidCount);
-        controller = new FieldController(model);
+        model = new AsteroidField();
+
+        controller = new FieldController();
+        controller.setupWorld(model);
+
+        gui = new GUI();
         view = new FieldRenderer();
+
+        input = new DesktopInput();
     }
 
     @Override
     public void render(float delta) {
         controller.update(model, delta);
         view.render(model, delta);
-        // Reset if space is pressed
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            model = new AsteroidField(asteroidCount);
-            controller = new FieldController(model);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            // Add an asteroid
-            asteroidCount++;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            // Subtract an asteroid
-            asteroidCount--;
-        }
+        gui.render(controller.asteroidCount);
+        input.handleInput(controller, model);
     }
 
     @Override
