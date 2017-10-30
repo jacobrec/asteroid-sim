@@ -23,8 +23,8 @@ public class Shuttle extends Collidable {
     private void createShuttle(Body body) {
         Vector2[] points = new Vector2[3];
         points[0] = new Vector2(0, 0);
-        points[1] = new Vector2(-0.5f, -1);
-        points[2] = new Vector2(0.5f, -1);
+        points[1] = new Vector2(-0.25f, -0.5f);
+        points[2] = new Vector2(0.25f, -0.5f);
 
         PolygonShape polygon = new PolygonShape();
         polygon.set(points);
