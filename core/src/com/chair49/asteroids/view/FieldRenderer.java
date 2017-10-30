@@ -1,4 +1,4 @@
-package com.chair49.astroids.view;
+package com.chair49.asteroids.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -8,9 +8,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.chair49.astroids.model.Asteroid;
-import com.chair49.astroids.model.AsteroidField;
-import com.chair49.astroids.model.Shuttle;
+import com.chair49.asteroids.model.Asteroid;
+import com.chair49.asteroids.model.AsteroidField;
+import com.chair49.asteroids.model.Shuttle;
 
 /**
  * Created by jacob on 29/10/17.

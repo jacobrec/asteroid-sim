@@ -1,12 +1,12 @@
-package com.chair49.astroids.screens;
+package com.chair49.asteroids.screens;
 
 import com.badlogic.gdx.Screen;
-import com.chair49.astroids.controller.FieldController;
-import com.chair49.astroids.input.DesktopInput;
-import com.chair49.astroids.input.Input;
-import com.chair49.astroids.model.AsteroidField;
-import com.chair49.astroids.view.FieldRenderer;
-import com.chair49.astroids.view.GUI;
+import com.chair49.asteroids.controller.FieldController;
+import com.chair49.asteroids.input.DesktopInput;
+import com.chair49.asteroids.input.Input;
+import com.chair49.asteroids.model.AsteroidField;
+import com.chair49.asteroids.view.FieldRenderer;
+import com.chair49.asteroids.view.GUI;
 
 /**
  * Created by jacob on 29/10/17.

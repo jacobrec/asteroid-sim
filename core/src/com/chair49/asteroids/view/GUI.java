@@ -1,4 +1,4 @@
-package com.chair49.astroids.view;
+package com.chair49.asteroids.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;

@@ -1,8 +1,8 @@
-package com.chair49.astroids.desktop;
+package com.chair49.asteroids.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.chair49.astroids.MyGame;
+import com.chair49.asteroids.MyGame;
 
 public class DesktopLauncher {
     public static void main(String[] arg) {

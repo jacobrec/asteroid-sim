@@ -1,4 +1,4 @@
-package com.chair49.astroids.model;
+package com.chair49.asteroids.model;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;

@@ -1,7 +1,7 @@
-package com.chair49.astroids.input;
+package com.chair49.asteroids.input;
 
-import com.chair49.astroids.controller.FieldController;
-import com.chair49.astroids.model.AsteroidField;
+import com.chair49.asteroids.controller.FieldController;
+import com.chair49.asteroids.model.AsteroidField;
 
 /**
  * Created by jacob on 30/10/17.

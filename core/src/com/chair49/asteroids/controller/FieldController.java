@@ -1,9 +1,9 @@
-package com.chair49.astroids.controller;
+package com.chair49.asteroids.controller;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.chair49.astroids.model.Asteroid;
-import com.chair49.astroids.model.AsteroidField;
+import com.chair49.asteroids.model.Asteroid;
+import com.chair49.asteroids.model.AsteroidField;
 
 /**
  * Created by jacob on 29/10/17.
@@ -32,14 +32,14 @@ public class FieldController {
         model.getWorld().step(delta, 6, 2);
         repositionOffscreenAsteroids(model);
         removeDeadAsteroids(model);
-        addNewAstroids(model);
+        addNewAsteroids(model);
         for (Asteroid a : model.asteroids) {
             a.timeAlive += delta;
         }
 
     }
 
-    private void addNewAstroids(AsteroidField model) {
+    private void addNewAsteroids(AsteroidField model) {
         for (int i = model.asteroidsToAdd.size() - 1; i >= 0; i--) {
             model.addAsteroid(AsteroidFactory.getAsteroid(model.asteroidsToAdd.remove(i)));
         }

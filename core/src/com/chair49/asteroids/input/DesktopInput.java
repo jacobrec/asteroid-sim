@@ -1,4 +1,4 @@
-package com.chair49.astroids.input;
+package com.chair49.asteroids.input;
 
 import com.badlogic.gdx.Gdx;
 
