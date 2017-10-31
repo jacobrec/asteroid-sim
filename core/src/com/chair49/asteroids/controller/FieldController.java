@@ -62,7 +62,7 @@ public class FieldController {
             Vector2 velocity = asteroid.getBody().getLinearVelocity();
 
             // Horizontal bounds
-            int padding = 5;
+            float padding = 0.5f;
             float minX = -padding;
             float maxX = model.getWorldWidth() + padding;
             if (position.x < minX && velocity.x < 0) {
