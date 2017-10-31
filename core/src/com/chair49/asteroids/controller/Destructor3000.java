@@ -36,9 +36,9 @@ public class Destructor3000 implements ContactListener {
         } else if (a1.timeAlive + a2.timeAlive > 1) {
             a1.killMe = true;
             a2.killMe = true;
-            LightWeightAsteroidThingy a3 = new LightWeightAsteroidThingy(model.getWorld(), a1.getBody().getLinearVelocity().add(0.1f, 0.1f), a1.getBody().getPosition().add(0.2f, 0.2f), a1.area / 5);
-            LightWeightAsteroidThingy a4 = new LightWeightAsteroidThingy(model.getWorld(), a1.getBody().getLinearVelocity().add(-0.1f, -0.1f), a1.getBody().getPosition().add(-0.2f, -0.2f), a1.area / 5);
-            LightWeightAsteroidThingy a5 = new LightWeightAsteroidThingy(model.getWorld(), a2.getBody().getLinearVelocity().add(0.1f, 0.1f), a2.getBody().getPosition(), a2.area / 5);
+            LightWeightAsteroidThingy a3 = new LightWeightAsteroidThingy(model.getWorld(), a1.getBody().getLinearVelocity().add(0.1f, 0.1f), a1.getBody().getPosition().add(0.2f, 0.2f), a1.area / 3);
+            LightWeightAsteroidThingy a4 = new LightWeightAsteroidThingy(model.getWorld(), a1.getBody().getLinearVelocity().add(-0.1f, -0.1f), a1.getBody().getPosition().add(-0.2f, -0.2f), a1.area / 3);
+            LightWeightAsteroidThingy a5 = new LightWeightAsteroidThingy(model.getWorld(), a2.getBody().getLinearVelocity().add(0.1f, 0.1f), a2.getBody().getPosition(), a2.area / 3);
 
             model.asteroidsToAdd.add(a3);
             model.asteroidsToAdd.add(a4);
