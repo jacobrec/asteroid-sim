@@ -2,6 +2,7 @@ package com.chair49.asteroids.controller;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.chair49.asteroids.model.Asteroid;
 import com.chair49.asteroids.model.AsteroidField;
 
@@ -24,19 +25,16 @@ public class FieldController {
             model.addAsteroid(asteroid);
         }
         model.getWorld().setContactListener(new Destructor3000(model));
-
-
     }
 
     public void update(AsteroidField model, float delta) {
         model.getWorld().step(delta, 6, 2);
-        repositionOffscreenAsteroids(model);
+        repositionOffScreenObjects(model);
         removeDeadAsteroids(model);
         addNewAsteroids(model);
         for (Asteroid a : model.asteroids) {
             a.timeAlive += delta;
         }
-
     }
 
     private void addNewAsteroids(AsteroidField model) {
@@ -53,34 +51,40 @@ public class FieldController {
         }
     }
 
-
-    private void repositionOffscreenAsteroids(AsteroidField model) {
+    private void repositionOffScreenObjects(AsteroidField model) {
         // Check for asteroids that are out of bounds and travelling away from the screen
         // Then wrap them to the opposite side of the world
         for (Asteroid asteroid : model.asteroids) {
-            Vector2 position = asteroid.getBody().getPosition();
-            Vector2 velocity = asteroid.getBody().getLinearVelocity();
-
-            // Horizontal bounds
-            float padding = 0.5f;
-            float minX = -padding;
-            float maxX = model.getWorldWidth() + padding;
-            if (position.x < minX && velocity.x < 0) {
-                position.x = maxX;
-            } else if (position.x > maxX && velocity.x > 0) {
-                position.x = minX;
-            }
-
-            // Vertical bounds
-            float minY = -padding;
-            float maxY = model.getWorldHeight() + padding;
-            if (position.y < minY && velocity.y < 0) {
-                position.y = maxY;
-            } else if (position.y > maxY && velocity.y > 0) {
-                position.y = minY;
-            }
-
-            asteroid.getBody().setTransform(position, asteroid.getBody().getAngle());
+            repositionIfOffScreen(model, asteroid.getBody());
         }
+        // Do the same for the the shuttle
+        repositionIfOffScreen(model, model.shuttle.getBody());
+    }
+
+    // Reposition the specified body if it is currently out of bounds
+    private void repositionIfOffScreen(AsteroidField model, Body body) {
+        Vector2 position = body.getPosition();
+        Vector2 velocity = body.getLinearVelocity();
+
+        // Check horizontal bounds
+        float padding = 0.5f;
+        float minX = -padding;
+        float maxX = model.getWorldWidth() + padding;
+        if (position.x < minX && velocity.x < 0) {
+            position.x = maxX;
+        } else if (position.x > maxX && velocity.x > 0) {
+            position.x = minX;
+        }
+
+        // Check vertical bounds
+        float minY = -padding;
+        float maxY = model.getWorldHeight() + padding;
+        if (position.y < minY && velocity.y < 0) {
+            position.y = maxY;
+        } else if (position.y > maxY && velocity.y > 0) {
+            position.y = minY;
+        }
+
+        body.setTransform(position, body.getAngle());
     }
 }
