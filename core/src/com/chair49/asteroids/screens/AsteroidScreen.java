@@ -6,7 +6,7 @@ import com.chair49.asteroids.input.DesktopInput;
 import com.chair49.asteroids.input.Input;
 import com.chair49.asteroids.model.AsteroidField;
 import com.chair49.asteroids.view.FieldRenderer;
-import com.chair49.asteroids.view.GUI;
+//import com.chair49.asteroids.view.GUI;
 
 /**
  * Created by jacob on 29/10/17.
@@ -15,7 +15,7 @@ public class AsteroidScreen implements Screen {
     FieldController controller;
     AsteroidField model;
     FieldRenderer view;
-    GUI gui;
+//    GUI gui;
 
     Input input;
 
@@ -27,7 +27,7 @@ public class AsteroidScreen implements Screen {
         controller = new FieldController();
         controller.setupWorld(model);
 
-        gui = new GUI();
+//        gui = new GUI();
         view = new FieldRenderer();
 
         input = new DesktopInput();
@@ -37,7 +37,7 @@ public class AsteroidScreen implements Screen {
     public void render(float delta) {
         controller.update(model, delta);
         view.render(model, delta);
-        gui.render(controller.asteroidCount);
+//        gui.render(controller.asteroidCount);
         input.handleInput(controller, model);
     }
 
